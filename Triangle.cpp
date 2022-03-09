@@ -51,17 +51,59 @@ float Triangle::getLength(Dot a, Dot b) {
 
 float Triangle::roundSquare() {
     float p = (getLength(this->A, this->B) + getLength(this->B, this->C) + getLength(this->A, this->C)) / 2;
-    float r = sqrtf((p - getLength(this->A, this->B)*(p- getLength(this->B,this->C))*(p- getLength(this->A,this->C))) / p);
+    float r = sqrtf(
+            (p - getLength(this->A, this->B) * (p - getLength(this->B, this->C)) * (p - getLength(this->A, this->C))) /
+            p);
     return r;
 }
 
 float Triangle::triangleSquare() {
     float p = (getLength(this->A, this->B) + getLength(this->B, this->C) + getLength(this->A, this->C)) / 2;
-    return p*roundSquare();
+    return p * roundSquare();
 }
 
 std::string Triangle::toString() {
-    std::string s="Точки треугольника: Ax: " + std::to_string(this->A.getX()) +" Ay: " + std::to_string(this->A.getY()) + " Bx: "+ std::to_string(this->B.getX()) + " By: " + std::to_string(this->B.getY()) + " Cx: " + std::to_string(this->C.getX()) + " Cy: " + std::to_string(this->C.getY())+". Площадь равна: " +
-                                                                                                                                                                                                                                                                                                   std::to_string(triangleSquare());
+    std::string s =
+            "Точки треугольника: Ax: " + std::to_string(this->A.getX()) + " Ay: " + std::to_string(this->A.getY()) +
+            " Bx: " + std::to_string(this->B.getX()) + " By: " + std::to_string(this->B.getY()) + " Cx: " +
+            std::to_string(this->C.getX()) + " Cy: " + std::to_string(this->C.getY()) + ". Площадь равна: " +
+            std::to_string(triangleSquare());
     return s;
+}
+
+Triangle Triangle::move(float x, float y) {
+    this->A.setX(this->A.getX()+x);
+    this->A.setY(this->A.getY()+y);
+    this->B.setX(this->B.getX()+x);
+    this->B.setY(this->B.getY()+y);
+    this->C.setX(this->C.getX()+x);
+    this->C.setY(this->C.getY()+y);
+}
+
+bool Triangle::operator >(Triangle t1){
+    if (this->triangleSquare()>t1.triangleSquare())
+        return true;
+    else
+        return false;
+}
+
+bool Triangle::operator <(Triangle t1){
+    if (this->triangleSquare()<t1.triangleSquare())
+        return true;
+    else
+        return false;
+}
+
+bool Triangle::operator ==(Triangle t1){
+    if (this->triangleSquare()==t1.triangleSquare())
+        return true;
+    else
+        return false;
+}
+
+bool Triangle::operator !=(Triangle t1){
+    if (this->triangleSquare()!=t1.triangleSquare())
+        return true;
+    else
+        return false;
 }

@@ -12,9 +12,9 @@ public:
 
     float getY() const;
 
-    void setX(float x);
+    void setX(float);
 
-    void setY(float y);
+    void setY(float);
 };
 
 class Triangle {
@@ -24,10 +24,15 @@ public:
     Triangle();
     Triangle(Dot,Dot,Dot);
     Triangle(float,float,float,float,float,float);
-    float getLength(Dot A, Dot B);
+    float getLength(Dot , Dot );
     float roundSquare();
     float triangleSquare();
     std::string toString();
+    Triangle move (float , float);
+    bool operator >(Triangle );
+    bool operator <(Triangle );
+    bool operator == (Triangle);
+    bool operator != (Triangle);
 };
 
 
